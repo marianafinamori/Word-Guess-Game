@@ -33,14 +33,16 @@
              var guessesLeftText = document.getElementById("remaining-tries-text");
              var wrongLettersText = document.getElementById("wrong-letters-text");
              var gameOver = document.getElementById("gameOver");
+             var unsolved = document.getElementById("word-container");
      
          
      
-             document.getElementById("start").addEventListener("click", function () {
+             document.getElementById("start").addEventListener("click", function start() {
                  document.getElementById("topic").innerHTML = topics[indexTopics].hint;
                  for (var i=0; i < answer.length; i++) {
-                     correctAnswer[i] = "__";
-                 }
+                    correctAnswer[i] = "_";
+                    unsolved.innerHTML = correctAnswer.join(" ");
+                }
              })
      
              document.onkeydown = function(event) {
@@ -86,6 +88,7 @@
      
              document.getElementById("again").addEventListener("click", function () {
                  guessesLeft = 5;
+                 guessesLeftText.textContent = guessesLeft;
                  wrongLetters = [];
                  correctAnswer = [];
                  indexTopics = [Math.floor(Math.random() * topics.length)];
@@ -94,7 +97,10 @@
                  document.getElementById("topic").innerHTML = topics[indexTopics].hint;
                  for (var i=0; i < answer.length; i++) {
                      correctAnswer[i] = "_";
+                     unsolved.innerHTML = correctAnswer.join(" ");
                  }
                  gameOver.textContent = "";
+                 wrongLettersText.textContent = wrongLetters;
+                 start();
              })
              
