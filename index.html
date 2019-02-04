@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Word Guess Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Hind+Siliguri|Montserrat" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>About Europe</h1>
+        </header>
+
+        <div>
+            <button id="start">Start</button>
+            <div>   
+                <h3 id="topic"></h3>
+                <p><span id="word-container"></span></p>
+            </div>
+        </div>
+    
+        <div>
+            <p>Remaining tries: <span id="remaining-tries-text"></span></p>
+            <p>Wins: <span id="wins-text"></span></p>
+            <p>Wrong letters so far: <span id="wrong-letters-text"></span></p>
+            <p id="gameOver"></p>
+        </div>
+
+        <button id="again">Try another word</button>
+    
+    </div>      
+
+
+    <script src="assets/javascript/game.js"></script>
+</body>
+</html>
