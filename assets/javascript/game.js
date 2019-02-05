@@ -10,8 +10,22 @@
      
                  {hint: "London street market",
                  answer: "camden"
-                 }
-             ]
+                 },
+
+                 {hint: "Second oldest amusement park in the world",
+                 answer: "tivoli"
+                },
+
+                {hint: "Place in Portugal where Europeans like to go in the summer",
+                answer: "algarve"
+                },
+
+                {hint: "City where Miró Foundation is located",
+                answer: "barcelona"
+                }
+
+             ];
+             console.log(topics);
      
              var wins = 0;
              var guessesLeft = 5;
@@ -26,7 +40,9 @@
      
              var wrongLetters = [];
      
-             var missingLetters = answer.length;
+             var missingLetters = topics[indexTopics].answer.length;
+
+             
 
      
              var winsText = document.getElementById("wins-text");
@@ -34,66 +50,69 @@
              var wrongLettersText = document.getElementById("wrong-letters-text");
              var gameOver = document.getElementById("gameOver");
              var unsolved = document.getElementById("word-container");
-     
-         
-     
-             document.getElementById("start").addEventListener("click", function start() {
-                 document.getElementById("topic").innerHTML = topics[indexTopics].hint;
-                 for (var i=0; i < answer.length; i++) {
-                    correctAnswer[i] = "_";
-                    unsolved.innerHTML = correctAnswer.join(" ");
+
+             winsText.textContent = wins;
+             guessesLeftText.textContent = guessesLeft;
+
+            document.getElementById("start").addEventListener("click", function init () {
+                document.getElementById("topic").innerHTML = topics[indexTopics].hint;
+                for (var i=0; i < answer.length; i++) {
+                   correctAnswer[i] = "_";
+                   unsolved.innerHTML = correctAnswer.join(" ");
                 }
-             })
+            });    
      
-             document.onkeydown = function(event) {
-     
-                 var userGuess = event.key;
-     
+            document.onkeydown = function guess(event) {
+                var userGuess = event.key;
                  if (answer.indexOf(userGuess) >=0) {
                      if (correctAnswer.indexOf(userGuess.toUpperCase()) < 0) {
                          for (var j=0; j < answer.length; j++) {
                              if (userGuess === answer[j]) {
-                                 correctAnswer[j] = userGuess.toUpperCase();
-                                 var rightGuess = document.getElementById("word-container");
-                                 rightGuess.innerHTML = correctAnswer.join(" ");
-                                 missingLetters--;
-                                 if (missingLetters === 0) {
-                                 wins++;
-                                 gameOver.textContent = "WINNER!";
-                            
-                                 }
-                             }
-     
-                         }
-                     }
-                 } else {
-                     if (wrongLetters.indexOf(userGuess.toUpperCase()) < 0) {
-                         wrongLetters.push(userGuess.toUpperCase());
-                         wrongLettersText.textContent = wrongLetters.join(", ");
-                         guessesLeft--;
-                         
-                         if (guessesLeft === 0) {
-                             gameOver.textContent = answer.toUpperCase();
-                         }
-                     }
-     
-     
-                 }
+                                    missingLetters--;
+                                    console.log(missingLetters);
+                                    winsText.textContent = wins;
+                                    correctAnswer[j] = userGuess.toUpperCase();
+                                    var rightGuess = document.getElementById("word-container");
+                                    rightGuess.innerHTML = correctAnswer.join(" ");
+                                    if (missingLetters === 0) {
+                                        wins++;
+                                        winsText.textContent = wins;
+                                        console.log(wins);
+                                        gameOver.textContent = "WINNER!";
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                            if (guessesLeft > 0) {
+                            guessesLeft--;
+                            guessesLeftText.textContent = guessesLeft;
+                            if (wrongLetters.indexOf(userGuess.toUpperCase()) < 0) {
+                                    wrongLetters.push(userGuess.toUpperCase());
+                                    wrongLettersText.textContent = wrongLetters.join(", ");
+                                }
+                            } 
+                            if ((guessesLeft === 0) || (missingLetters === 0)) {
+                                    gameOver.textContent = answer.toUpperCase();
+                                }
+                                
+                            }
+                        }
 
                  winsText.textContent = wins;
                  guessesLeftText.textContent = guessesLeft;
+        
              
-     
-             };
-     
-             document.getElementById("again").addEventListener("click", function () {
+             
+
+             document.getElementById("again").addEventListener("click", function reset() {
                  guessesLeft = 5;
                  guessesLeftText.textContent = guessesLeft;
                  wrongLetters = [];
                  correctAnswer = [];
                  indexTopics = [Math.floor(Math.random() * topics.length)];
                  answer = topics[indexTopics].answer;
-                 missingLetters = answer.lenght; 
+                 missingLetters = answer.length; 
                  document.getElementById("topic").innerHTML = topics[indexTopics].hint;
                  for (var i=0; i < answer.length; i++) {
                      correctAnswer[i] = "_";
@@ -101,6 +120,15 @@
                  }
                  gameOver.textContent = "";
                  wrongLettersText.textContent = wrongLetters;
-                 start();
-             })
+                 init();
+                
+             });
+
+function init()  {
+    document.getElementById("topic").innerHTML = topics[indexTopics].hint;
+    for (var i=0; i < answer.length; i++) {
+       correctAnswer[i] = "_";
+       unsolved.innerHTML = correctAnswer.join(" ");
+    }
+}
              
