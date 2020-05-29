@@ -5,6 +5,6 @@ Questions are randomly chosen.
 
 <img src="assets/img/hangman_img.png">
 
-TECHNOLOGIES
+TECHNOLOGIES:
 HTML, CSS, Javascript and Bootstrap
 
