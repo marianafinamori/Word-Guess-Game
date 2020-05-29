@@ -1,42 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Word Guess Game</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Hind+Siliguri|Montserrat" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Word Guess Game</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500&family=Montserrat&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Volkhov&display=swap" rel="stylesheet">
+    </head>
 
-<body>
-    <div class="container">
+    <body>
         <header>
-            <h1>About Europe</h1>
+            <h1>Hangman</h1>
         </header>
-        <p id="instructions">Type in letters and try to guess words related to European places and culture.</p>
-        <div>
-            <button id="start">Start</button>
-            <div>   
-                <h3 id="topic"></h3>
-                <p><span id="word-container"></span></p>
+        <div class="container main">
+            <div class="row">
+                <span id="start"><a href="#" class="middle">START</a></span>
+                <h5>Wins: <span id="wins-text"></span></h5>
+            </div>
+            <div id="question">
+                <div>   
+                    <h3 id="topic"></h3>
+                    <p id="word-container" class="container"></p>
+                </div>
+            </div>
+            <div>
+                <p id="remaining-tries">Remaining tries: <span id="remaining-tries-text"></span></p>
+                <p>Wrong letters so far: <span id="wrong-letters-text"></span></p>
+                <div id="board">
+                    <div class = "row alphabet row1"></div>
+                    <div class = "row alphabet row2"></div>
+                    <div class = "row alphabet row3"></div>
+                    <div class = "row alphabet row4"></div>
+                    <div class = "row alphabet row5"></div>
+                </div>
+                <div class="again-btn-div"></div>
+            </div>
+        </div>    
+        <!-- MODAL -->
+        <div class="modal fade" id="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <h4 class="modal-body"></h4>
+                <div class="modal-footer">
+                <button type="button" class="again btn btn-sm btn-outline-dark" data-dismiss="modal" id="again">NEXT</button>
+                </div>
+            </div>
             </div>
         </div>
-    
-        <div>
-            <p>Remaining tries: <span id="remaining-tries-text"></span></p>
-            <p>Wins: <span id="wins-text"></span></p>
-            <p>Wrong letters so far: <span id="wrong-letters-text"></span></p>
-            <p id="gameOver"></p>
+
+        <!-- ALERT -->
+        <div class="modal fade" id="alert" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="alert-msg"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-sm btn-outline-dark" data-dismiss="modal" id="close-alert">CLOSE</button>
+                </div>
+            </div>
+            </div>
         </div>
 
-        <button id="again">Try another word</button>
-    
-    </div>      
-
-
-    <script src="assets/javascript/game.js"></script>
-</body>
+        <!-- Javascript links   -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script src="assets/javascript/game.js"></script>
+    </body>
 </html>
