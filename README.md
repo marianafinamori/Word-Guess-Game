@@ -1,4 +1,5 @@
-WORD-GUESS-GAME
+## WORD-GUESS-GAME
+
 This is a classic hangman game. 
 Users can either type letters or click them on the board. 
 Questions are randomly chosen.
